@@ -7,36 +7,77 @@
 A template for nestjs with locust, prisma, webpack, firebase, sqs, terminus, repl, testing, validation, swagger, @nest/config, redis and newrelic.
 ## Pre-requisite
 * Create a ```.env``` file to the root of the repo after cloning the template. It should have all the keys mentioned in ```.env.sample```
+* Make sure your ```npx``` works to use prisma commands
 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn
 ```
 This will automatically generate the client for prisma as the schema in ```prisma/schema.prisma```.
 
-## Running the app
+## Running the app(uses webpack)
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
+
+# repl mode
+$ yarn start:repl
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
+
+# load test with locust, edit locustfile.py to add your own endpoints testing
+$ yarn test:laod
+```
+
+## Prisma
+
+```bash
+# Generate client
+$ yarn prisma:gen
+
+# Reset dev db
+$ migrate:reset:dev
+
+# Run dev migrations
+$ yarn migrate:run:dev
+
+# Run prod migrations
+$ yarn migrate:run:prod
+
+# Generate new migrations for schema changes
+$ yarn migrate:gen
+```
+
+#### Note for prisma migrate with docker
+Prisma Migrate in non-interactive environments
+Prisma detects when you run CLI commands in non-interactive environments, such as Docker, from Node scripts or in bash shells. When this happens a warning displays, indicating that the environment is non-interactive and the ```migrate dev``` command is not supported.
+
+To ensure the Docker environment picks up the command, run the image in interactive mode so that it reacts to the ```migrate dev``` command.
+
+```bash
+docker run --interactive --tty <image name>
+# or
+docker -it <image name>
+
+# Example usage
+$ docker run -it node
 ```
