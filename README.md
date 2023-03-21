@@ -81,3 +81,6 @@ docker -it <image name>
 # Example usage
 $ docker run -it node
 ```
+
+## Health check
+To check the health of your app, navigate to ```/health-check``` in your browser after starting the app.
