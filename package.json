@@ -6,8 +6,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "deploy:sls": "NODE_ENV=dev sls deploy",
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "nest build --webpack",
+    "build:sls": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:repl": "yarn start -- --entryFile repl",

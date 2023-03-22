@@ -1,0 +1,58 @@
+org: noobie
+service: ez-nest
+
+frameworkVersion: '3'
+useDotenv: true
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${env:NODE_ENV, 'dev'} # Default stage to be used. Default is "dev"
+  region: ap-south-1 # Default region to be used. Default is "us-east-1"
+  apiName: ${self:service}
+  versionFunctions: false
+  memorySize: 256
+  architecture: arm64
+  ecr:
+    images:
+      appimage:
+        path: ./
+
+functions:
+  api:
+#     handler: dist/lambda.handler
+    image:
+      name: appimage
+      command:
+        - dist/lambda.handler
+      entryPoint:
+        - '/lambda-entrypoint.sh'
+    events:
+      - http:
+          method: any
+          path: /{any+}
+          cors: true
+
+custom:
+    serverless-offline:
+      httpPort: 3000
+    esbuild:
+      bundle: true
+      minify: false
+      platform: 'node'
+      external:
+       - "cache-manager"
+       - "class-transformer"
+       - "class-validator"
+       - "@nestjs/mongoose"
+       - "@mikro-orm/core"
+       - "@nestjs/typeorm/dist/common/typeorm.utils"
+       - "@nestjs/sequelize/dist/common/sequelize.utils"
+       - "@nestjs/microservices"
+       - "@nestjs/websockets/socket-module"
+      watch:
+       pattern: ['src/**/*.ts']
