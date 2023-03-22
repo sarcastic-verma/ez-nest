@@ -7,7 +7,7 @@
 A template for nestjs with locust, prisma, webpack, firebase, sqs, terminus, repl, testing, validation, swagger, @nest/config, redis and newrelic. For deployment, we have two options:
 * Cloud Native: This is pretty straight-forward and once can use the standard build script with Elastic Beanstalk or use the existing basic Docker file.
 
-* Serverless: For this, we are using ECR for deploying to lambdas as that has 10GB of space available for deployment compared to 256MB.
+* Serverless: For this, we are using ECR for deploying to lambdas as that has 10GB of space available for deployment compared to 250MB(unzipped including layers).
 
 ### Deployment Note
 Currently, one needs keys for all the modules for app to work completely. Incase, you wanna skip out those just comment out whichever keys you don't have.  
