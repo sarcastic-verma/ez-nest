@@ -14,7 +14,14 @@ declare const module: any;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.useGlobalInterceptors(new NewrelicInterceptor());
+  const configService = app.get(ConfigService);
+
+  const newrelicApp = configService.get('newrelicApp');
+  const newrelicLicense = configService.get('newrelicLicense');
+
+  if (newrelicApp && newrelicLicense)
+    app.useGlobalInterceptors(new NewrelicInterceptor());
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

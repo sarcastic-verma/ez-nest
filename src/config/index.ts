@@ -12,6 +12,8 @@ export const config = {
   firebasePrivateKey: process.env.FIREBASE_PRIVATE_KEY,
   firebaseClientEmail: process.env.FIREBASE_CLIENT_EMAIL,
   firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
+  newrelicApp: process.env.NEWRELIC_APP,
+  newrelicLicense: process.env.NEWRELIC_LICENSE_KEY,
 };
 
 export default () => config;
