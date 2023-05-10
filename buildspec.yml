@@ -5,12 +5,8 @@ phases:
     runtime-versions:
       nodejs: 16
       commands:
-        - echo Installing Nest...
-        - npm install -g @nestjs/cli
-  pre_build:
-    commands:
-      - echo Installing source NPM dependencies...
-      - npm install
+        - echo Installing deps...
+        - npm install
   build:
     commands:
       - echo Build started on `date`
